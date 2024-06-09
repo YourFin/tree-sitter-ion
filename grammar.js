@@ -75,7 +75,7 @@ module.exports = grammar({
 
     string: $ => choice(
       $._string_short,
-      $._string_long,
+      prec(1, repeat1($._string_long)),
     ),
     _string_short: $ => seq('"', repeat($._string_chunk), '"'),
     _string_chunk: $ => choice(
@@ -84,10 +84,10 @@ module.exports = grammar({
     ),
 
     // TODO: join multi-line strings together?
-    _string_long: $ => seq("'''", repeat($._string_long_chunk), "'''"),
+    _string_long: $ => seq("'''", repeat($._string_long_contents), "'''"),
 
-    _string_long_chunk: $ => choice(
-      token.immediate(prec(1, /[^'\\]+/)),
+    _string_long_contents: $ => choice(
+      token.immediate(prec(1, /('?'?[^'\\])+/)),
       $.escape,
     ),
 
@@ -182,10 +182,10 @@ module.exports = grammar({
   ],
 
   inline: $ => [
-    $._string_short,
     $._string_long,
+    $._string_short,
     $._string_chunk,
-    $._string_long_chunk,
+    $._string_long_contents,
   ],
 });
 
