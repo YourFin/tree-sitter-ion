@@ -110,6 +110,9 @@ module.exports = grammar({
       const quartet = seq(char, char, char, char);
       const pad1 = seq(char, char, char, '=');
       const pad2 = seq(char, char, '=', '=');
+      // NOTE: The ion /spec/ says that padding characters
+      // aren't allowed in here, but the ion cli tool
+      // will accept quartets that include padding
       return repeat1(choice(quartet, pad1, pad2));
     },
 
