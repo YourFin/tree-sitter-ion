@@ -86,10 +86,11 @@ module.exports = grammar({
     // TODO: join multi-line strings together?
     _string_long: $ => seq("'''", repeat($._string_long_contents), "'''"),
 
-    _string_long_contents: $ => choice(
-      token.immediate(prec(1, /('?'?[^'\\])+/)),
-      $.escape,
-    ),
+    _string_long_contents: $ =>
+      seq(
+        token.immediate(/'?'?/),
+        choice(token.immediate(prec(1, /[^'\\]+/)),
+               $.escape)),
 
     symbol: $ => choice(
       $.symbol_ref,
