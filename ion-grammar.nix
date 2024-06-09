@@ -1,7 +1,4 @@
-{ stdenv
-, nodejs
-, tree-sitter
-}:
+{ stdenv, nodejs, tree-sitter, ion-tests }:
 stdenv.mkDerivation rec {
   pname = "ion-grammar";
   version = "0.1.0";
