@@ -12,6 +12,20 @@ const { ION_TESTS_DIR } = z
   .object({ ION_TESTS_DIR: z.string() })
   .parse(process.env);
 
+function lineNumbers(str: string): string {
+  const split = str.split("\n");
+  const gutterWidth = split.length.toString().length + 1;
+  let result = "";
+  let nl = "";
+  for (let idx = 0; idx < split.length; idx++) {
+    const line = split[idx];
+    const spaces = gutterWidth - idx.toString().length;
+    result += `${nl}${idx}${" ".repeat(spaces)} | ${line}`;
+    nl = "\n";
+  }
+  return result;
+}
+
 async function* walkDir(
   dir: string,
   fileFilter: (fname: string) => boolean,
@@ -54,7 +68,14 @@ describe.concurrent("Ion 1_0", async () => {
         const matches = errorNodeQuery.matches(tree.rootNode);
         for (const match of matches) {
           // TODO: parseable error messages
-          console.log(match);
+
+          console.log(`=== ${relativeToDir} ===`);
+          console.log(match.captures[0].node.toString());
+          console.log(match.captures[0].node);
+          console.log(lineNumbers(match.captures[0].node.tree.input));
+        }
+        if (matches.length > 0) {
+          throw new Error();
         }
         expect(matches).toEqual([]);
       });
