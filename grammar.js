@@ -103,8 +103,15 @@ module.exports = grammar({
     ),
 
     // TODO: forbid comments
-    // TODO: ensure padding/bits alignment
-    blob: $ => seq('{{', repeat1(/[A-Za-z0-9+/]+={0,3}/), '}}'),
+    blob: $ => seq('{{', $._base_64, '}}'),
+    _base_64: $ => {
+      // BUG: does not allow base64 values containing //
+      const char = /[A-Za-z0-9+\/]/;
+      const quartet = seq(char, char, char, char);
+      const pad1 = seq(char, char, char, '=');
+      const pad2 = seq(char, char, '=', '=');
+      return repeat1(choice(quartet, pad1, pad2));
+    },
 
     // TODO: forbid comments
     // TODO: limit to 7-bit strings (including own escape)
