@@ -1,0 +1,83 @@
+=====
+blobs.ion spec test value #0
+=====
+{{ //// }}
+---
+(document (blob))
+
+=====
+blobs.ion spec test value #1
+=====
+{{
+		YSBiIGMgZCBlIGYgZyBoIGkgaiBrIGwgbSBuIG8gcCBxIHIgcyB0IHUgdiB3IHggeSB6
+}}
+---
+(document
+  (blob))
+=====
+blobs.ion spec test value #2
+=====
+{{  QSB CIEM  gRC B F IEYg Ry BI IEk gSi BLIE w   gTS B OI       E8 g UC BRI FIgUy BU IF Ug ViB XI F gg WS B a}}
+---
+(document
+  (blob))
+=====
+blobs.ion spec test value #3
+=====
+{{MSAyIDMgNCA1IDYgNyA4IDkgMA
+==}}
+---
+(document
+  (blob))
+=====
+blobs.ion spec test value #4
+=====
+{{
+
+			LCAuIDsgLyBbICcgXSBcID0gLSAwIDkgOCA3IDYgNSA0IDMgMiAxIGAgfiAhIEAgIyAkICUgXiAmICogKCApIF8gKyB8IDogPCA+ID8=
+
+      }}
+---
+(document
+  (blob))
+=====
+blobs.ion spec test value #5
+=====
+{{OiBTIKUgTyAASb8=}}
+---
+(document
+  (blob))
+=====
+blobs.ion spec test value #6
+=====
+{{  //79/PsAAQIDBAU=  }}
+---
+(document
+  (blob))
+=====
+blobs.ion spec test value #7
+=====
+{{
+A
+ R E
+Z H i
+ w 3 P
+E h R Y 2
+ d 1 f Y u
+O n K W x t
+ c b M 0 9 /
+v 9 v 8 A
+}}
+---
+(document
+  (blob))
+=====
+blobs.ion spec test value #8
+=====
+						      {{ QSBWZXJ5IFZlcnkgVmVyeSBWZXJ5IExhcmdlIFRlc3QgQmxvYg== }} // A Very Very Very Very Large Test Blob
+
+---
+
+(document
+  (blob)
+  (comment))

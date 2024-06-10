@@ -1,0 +1,246 @@
+=====
+clobs.ion spec test value #1
+=====
+{{"a b c d e f g h i j k l m n o p q r s t u v w x y z"}}
+----
+(document (clob))
+=====
+clobs.ion spec test value #2
+=====
+{{
+        "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"
+}}
+----
+(document (clob))
+=====
+clobs.ion spec test value #3
+=====
+{{            "1 2 3 4 5 6 7 8 9 0"              }}
+----
+(document (clob ))
+=====
+clobs.ion spec test value #4
+=====
+{{   ", . ; / [ ' ] \\ = - 0 9 8 7 6 5 4 3 2 1 ` ~ ! @ # $ % ^ & * ( ) _ + | : < > ?"
+
+}}
+----
+(document (clob (escape)))
+=====
+clobs.ion spec test value #5
+=====
+{{                   "\0 \a \b \t \n \f \r \v \" \' \? \\\\ \/ \0\a\b\t\n\f\r\v\"\'\?\\\\\/"}}
+----
+(document
+  (clob
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)
+    (escape)))
+=====
+clobs.ion spec test value #6
+=====
+{{"\x7f \x66 \x00 \x5a\x5b\x00\x1c\x2d\x3f\xFf"}}
+----
+(document (clob
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))))
+=====
+clobs.ion spec test value #7
+=====
+{{"\x7F \x66 \x00 \x5A\x5B\x00\x1C\x2D\x3F\xfF"}}
+----
+(document (clob
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))))
+=====
+clobs.ion spec test value #8
+=====
+{{'''Stuff to write on '''
+  '''multiple lines '''
+  '''if you want to'''}}
+----
+(document (clob))
+=====
+clobs.ion spec test value #9
+=====
+{{""}}
+----
+(document (clob))
+=====
+clobs.ion spec test value #10
+=====
+{{''''''}}
+----
+(document (clob))
+=====
+clobs.ion spec test value #11
+=====
+{{
+""
+}}
+----
+(document (clob))
+=====
+clobs.ion spec test value #12
+=====
+{{  '''concatenated'''  ''' from '''   '''a single line'''  }}
+----
+(document (clob))
+=====
+clobs.ion spec test value #13
+=====
+{{ ""}}
+----
+(document (clob))
+=====
+clobs.ion spec test value #14
+=====
+{{
+        '''a b c d e f g h i j k l m n o p q r s t u v w x y z '''
+        '''A B C D E F G H I J K L M N O P Q R S T U V W X Y Z '''
+        ''', . ; / [ ' ] \\ = - 0 9 8 7 6 5 4 3 2 1 ` ~ ! @ # $ % ^ & * ( ) _ + | : < > ? '''
+        '''\0 \a \b \t \n \f \r \v \" \' \? \\\\ \/ \0\a\b\t\n\f\r\v\"\'\?\\\\\/'''
+        '''\x7f \x66 \x00 \x5a\x5b\x00\x1c\x2d\x3f'''
+        '''\x7F \x66 \x00 \x5A\x5B\x00\x1C\x2D\x3F'''
+}}
+----
+(document (clob
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape)
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))
+        (escape
+          (hex_escape))))
+=====
+clobs.ion spec test value #15
+=====
+{{'''\
+multi-line string
+with embedded\nnew line
+characters\
+'''}}
+----
+(document (clob
+        (escape)
+        (escape)
+        (escape)))
