@@ -83,7 +83,6 @@ module.exports = grammar({
       $.escape,
     ),
 
-    // TODO: join multi-line strings together?
     _string_long: $ => seq("'''", repeat($._string_long_contents), "'''"),
 
     _string_long_contents: $ =>
@@ -104,13 +103,18 @@ module.exports = grammar({
     ),
 
     // TODO: forbid comments
-    blob: $ => seq('{{', $._base_64, '}}'),
+    blob: $ => seq('{{', $._base_64, optional($._ws), token.immediate('}}')),
     _base_64: $ => {
+      const noCommentSeq = (...args) => {
+        const val = seq(...args.flatMap((arg) =>
+          [optional($._ws), token.immediate(arg)]));
+        return val;
+      };
       // BUG: does not allow base64 values containing //
       const char = /[A-Za-z0-9+\/]/;
-      const quartet = seq(char, char, char, char);
-      const pad1 = seq(char, char, char, '=');
-      const pad2 = seq(char, char, '=', '=');
+      const quartet = noCommentSeq(char, char, char, char);
+      const pad1 = noCommentSeq(char, char, char, '=');
+      const pad2 = noCommentSeq(char, char, '=', '=');
       // NOTE: The ion /spec/ says that padding characters
       // aren't allowed in here, but the ion cli tool
       // will accept quartets that include padding
@@ -171,13 +175,15 @@ module.exports = grammar({
 
     _nl: $ => token.immediate(/\r\n|\n|\n/),
     comment: $ => choice(
-      /\/\/[^\n\r]*/,
+      prec.dynamic(0, /\/\/[^\n\r]*/),
       seq('/*', /([^*]|\*+[^*/])*/, alias(/\*+\//, '*/')),
     ),
+    _ws: $ => token.immediate(prec(-1,/\s+/)),
   },
 
   extras: $ => [
     /\s+/,
+    $._ws,
     $.comment,
   ],
 
